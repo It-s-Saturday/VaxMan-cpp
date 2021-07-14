@@ -61,8 +61,10 @@ int points = 0; // total points collected
 auto start = chrono::steady_clock::now();
 
 double startTime;
+static double currentTime;
 
 void init_vectors() {
+	startTime = GetTickCount();
 	v_pinkys.push_back(Monster{ 10.5, 8.5, 1.0 });
 	v_blinkys.push_back(Monster{ 13.5, 1.5, 2.0 });
 	v_inkys.push_back(Monster{ 4.5, 6.5, 3.0 });
@@ -490,7 +492,7 @@ void display() {
 	gameOver();
 	if (replay) {
 		if (!over) {
-			double currentTime = GetTickCount() - startTime;
+			currentTime = GetTickCount() - startTime;
 
 			drawLaberynth();
 			drawFood((1.5 + xIncrement) * squareSize, (1.5 + yIncrement) * squareSize);
