@@ -6,6 +6,6 @@ Goals:
   - The ghosts double after a certain amount of time
   - The game ends when the number of ghosts exceeds 128
 
-<img src="walkthrough.gif">
+<img src="walkthrough.gif.gif">
 
 Original Pacman: https://github.com/patriciateroltolsa/Pacman
