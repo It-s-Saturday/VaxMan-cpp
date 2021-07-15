@@ -27,6 +27,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <chrono>
+#include <sstream>
 using namespace std;
 using Monster = array<float, 3>;
 
@@ -437,12 +438,12 @@ void welcomeScreen() {
 	glRasterPos2f(150, 200);
 	while (*message)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *message++);
-	message = "PACMAN - by Patricia Terol";
+	message = "PACMAN - Original By Patricia Terol";
 	glColor3f(1, 1, 1);
 	glRasterPos2f(225, 250);
 	while (*message)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *message++);
-	message = "*************************************";
+	message = "Adapted by: Jibran Absarulislam and Nixon Puertollano";
 	glRasterPos2f(150, 300);
 	while (*message)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *message++);
@@ -480,8 +481,32 @@ void duplicateGhosts() {
 		}
 		it++;
 	}
+	
 }
 
+void showMetrics() {
+	glPushMatrix();
+	glTranslatef(100, 40, 0);
+	glScalef(.3, .3, 0.0);
+	glRotatef(180, 1, 0, 0);
+	glColor3f(0, 1.0, 1.0);
+	for (auto ch : to_string(currentTime/1000))
+	{
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, ch);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(400, 40, 0);
+	glScalef(.3, .3, 0.0);
+	glRotatef(180, 1, 0, 0);
+	glColor3f(0, 1.0, 1.0);
+	for (auto ch : to_string(count_ghosts))
+	{
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, ch);
+	}
+	glPopMatrix();
+}
 //Method to display the screen and its elements
 void display() {
 	if (points == 1) {
@@ -516,10 +541,11 @@ void display() {
 
 				it++;
 			}
+			showMetrics();
 			auto s = to_string(currentTime);
-			if (currentTime >= 3000) { // in MS
+			if (currentTime >= 5000) { // in MS
 				duplicateGhosts();
-				OutputDebugStringA("Time >= 3000");
+				OutputDebugStringA("Time >= 5000");
 				startTime = GetTickCount();
 			}
 		}
@@ -551,7 +577,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(750, 750);
 	glutInitWindowPosition(500, 50);
-	glutCreateWindow("PACMAN - by Patricia Terol");
+	glutCreateWindow("PACMAN - original by Patricia Terol\nAdapted by Jibran Absarulislam and\nNixon Puertollano");
 
 	//define all the control functions
 	glutDisplayFunc(display);
